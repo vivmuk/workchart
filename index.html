@@ -384,7 +384,7 @@
                                 content: userPrompt
                             }
                         ],
-                        temperature: 0.6,
+                        temperature: 0.7,
                         max_completion_tokens: 30000
                     };
 
@@ -815,20 +815,6 @@ Return ONLY a JSON object of the form:
                     <div class="bg-emerald-50 border-2 border-emerald-200 rounded-2xl p-5 shadow">
                         <div class="text-emerald-700 text-sm">Estimated Time Savings</div>
                         <div class="text-2xl font-extrabold text-emerald-900">${formatTime(savingsMinutes)}</div>
-                    </div>
-                </div>
-                <div class="mt-3 grid grid-cols-1 lg:grid-cols-3 gap-4 w-full">
-                    <div class="bg-white border-2 ${isDraft ? 'border-dashed border-secondary-300' : 'border-secondary-200'} rounded-2xl p-5 shadow lg:col-start-3">
-                        <div class="text-secondary-600 text-sm">Estimated Compute Cost — Future Workflow</div>
-                        <div class="text-2xl font-extrabold text-secondary-900">${formatCurrency(computeTotals.totalCost)}</div>
-                        <div class="text-xs text-secondary-600">${computeTotals.breakdownLabel}</div>
-                    </div>
-                </div>
-                <div class="mt-1 grid grid-cols-1 lg:grid-cols-3 gap-4 w-full">
-                    <div class="bg-white border-2 ${isDraft ? 'border-dashed border-secondary-300' : 'border-secondary-200'} rounded-2xl p-5 shadow lg:col-start-3">
-                        <div class="text-secondary-600 text-sm">Compute Cost of This Analysis</div>
-                        <div class="text-2xl font-extrabold text-secondary-900">${formatCurrency(analysisTotals.totalCost)}</div>
-                        <div class="text-xs text-secondary-600">${analysisTotals.breakdownLabel}</div>
                     </div>
                 </div>
             `;
