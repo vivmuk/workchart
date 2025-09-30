@@ -259,7 +259,7 @@
         // Venice API Configuration
         const API_KEY = "ntmhtbP2fr_pOQsmuLPuN_nm6lm2INWKiNcvrdEfEC";
         const API_URL = "https://api.venice.ai/api/v1/chat/completions";
-        const MODEL = "llama-3.1-405b"; // Using the most intelligent model
+        const MODEL = "qwen3-235b"; // Using Qwen3-235B in non-reasoning mode
         
         // Comparison schema (documentation only)
         const comparisonInitialSchema = {
@@ -384,7 +384,7 @@
                                 content: userPrompt
                             }
                         ],
-                        temperature: 0.7,
+                        temperature: 0.6,
                         max_completion_tokens: 30000
                     };
 
