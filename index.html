@@ -100,8 +100,8 @@
     <div class="container mx-auto px-4 py-4 md:py-6 max-w-6xl">
         <!-- Top Nav -->
         <nav class="flex items-center justify-between mb-6">
-            <a href="./" class="flex items-center space-x-2">
-                <span class="inline-block w-6 h-6 rounded gradient-bg"></span>
+            <a href="./" class="flex items-center space-x-2 group">
+                <svg class="w-6 h-6 text-primary-700 group-hover:text-primary-800 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
                 <span class="font-semibold text-lg text-secondary-900">Work Chart</span>
             </a>
             <div class="flex items-center space-x-2">
@@ -112,11 +112,26 @@
 
         <!-- Hero Section (focused) -->
         <header class="text-center mb-6">
-            <div class="gradient-bg text-white py-8 px-6 rounded-lg shadow-sm">
-                <h1 class="text-2xl md:text-3xl font-semibold mb-2">Design Workflows for Humans + AI</h1>
-                <p class="text-sm md:text-base font-light max-w-2xl mx-auto opacity-90">
-                    Generate clear work charts that map your process from trigger to outcome.
-                </p>
+            <div class="gradient-bg text-white py-8 px-6 rounded-lg shadow-sm relative overflow-hidden">
+                <div class="absolute inset-0 opacity-10">
+                    <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                        <path d="M0,0 L100,0 L100,100 L0,100 Z" fill="url(#grid)" />
+                        <defs>
+                            <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
+                                <path d="M 10 0 L 0 0 0 10" fill="none" stroke="white" stroke-width="0.5"/>
+                            </pattern>
+                        </defs>
+                    </svg>
+                </div>
+                <div class="relative">
+                    <div class="flex items-center justify-center mb-3">
+                        <svg class="w-8 h-8 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                        <h1 class="text-2xl md:text-3xl font-semibold">Design Workflows for Humans + AI</h1>
+                    </div>
+                    <p class="text-sm md:text-base font-light max-w-2xl mx-auto opacity-90">
+                        Generate clear work charts that map your process from trigger to outcome.
+                    </p>
+                </div>
             </div>
         </header>
 
@@ -685,9 +700,9 @@ Return ONLY a JSON object of the form:
             row.className = 'flex items-start';
 
             const ownerColors = {
-                'Human': 'bg-blue-100 text-blue-800 border-blue-200',
-                'Agent': 'bg-purple-100 text-purple-800 border-purple-200',
-                'Hybrid': 'bg-emerald-100 text-emerald-800 border-emerald-200'
+                'Human': 'bg-blue-500 text-white border-blue-600 shadow-sm',
+                'Agent': 'bg-purple-500 text-white border-purple-600 shadow-sm',
+                'Hybrid': 'bg-emerald-500 text-white border-emerald-600 shadow-sm'
             };
 
             (steps || []).forEach((step, index) => {
@@ -699,19 +714,19 @@ Return ONLY a JSON object of the form:
                     <div class="flex items-start justify-between">
                         <div class="pr-4">
                             <div class="flex items-center gap-2 mb-1">
-                                <span class="text-xs font-semibold px-2 py-0.5 rounded-full border ${ownerColor}">${step.owner}</span>
+                                <span class="text-xs font-medium px-2 py-1 rounded border ${ownerColor}">${step.owner}</span>
                                 <span class="text-sm font-semibold text-secondary-900">${step.step}</span>
                             </div>
-                            <div class="text-secondary-800 font-medium">${step.task}</div>
-                            <div class="grid grid-cols-2 gap-3 mt-3 text-sm text-secondary-700">
-                                <div>🎯 <span class="font-semibold text-secondary-900">Target:</span> ${step.successTarget}</div>
-                                <div>⚖️ <span class="font-semibold text-secondary-900">Rule:</span> ${step.rule}</div>
+                            <div class="text-secondary-800 font-medium text-sm">${step.task}</div>
+                            <div class="grid grid-cols-2 gap-3 mt-3 text-xs text-secondary-700">
+                                <div><span class="font-semibold text-secondary-900">Target:</span> ${step.successTarget}</div>
+                                <div><span class="font-semibold text-secondary-900">Rule:</span> ${step.rule}</div>
                             </div>
                         </div>
-                        <div class="text-right">
-                            <div class="text-sm text-secondary-600">Time</div>
-                            <div class="text-lg font-extrabold text-secondary-900">${formatTime(step.estimatedTimeMinutes || 0)}</div>
-                            ${showCompute && step.compute ? `<div class=\"mt-2 text-xs text-secondary-600\">${step.compute.modelId} · in ${formatTokens(step.compute.estimatedInputTokens)} · out ${formatTokens(step.compute.estimatedOutputTokens)}</div>` : ''}
+                        <div class="text-right flex-shrink-0">
+                            <div class="text-xs text-secondary-500 uppercase tracking-wide">Time</div>
+                            <div class="text-base font-semibold text-secondary-900">${formatTime(step.estimatedTimeMinutes || 0)}</div>
+                            ${showCompute && step.compute ? `<div class=\"mt-1 text-xs text-secondary-500\">${step.compute.modelId}</div>` : ''}
                         </div>
                     </div>`;
 
@@ -852,11 +867,11 @@ Return ONLY a JSON object of the form:
 
             process.steps.forEach((step, idx) => {
                 const ownerColors = {
-                    'Human': 'bg-primary-100 text-primary-800 border-primary-200',
-                    'Agent': 'bg-secondary-100 text-secondary-700 border-secondary-200',
-                    'Hybrid': 'bg-accent-green/10 text-accent-teal border-accent-green/20'
+                    'Human': 'bg-blue-500 text-white border-blue-600 shadow-sm',
+                    'Agent': 'bg-purple-500 text-white border-purple-600 shadow-sm',
+                    'Hybrid': 'bg-emerald-500 text-white border-emerald-600 shadow-sm'
                 };
-                const ownerColor = ownerColors[step.owner] || 'bg-secondary-100 text-secondary-700 border-secondary-200';
+                const ownerColor = ownerColors[step.owner] || 'bg-secondary-500 text-white border-secondary-600 shadow-sm';
 
                 const card = document.createElement('div');
                 card.className = 'work-chart-card border border-secondary-200 rounded-lg p-3 bg-white';
@@ -960,22 +975,32 @@ Return ONLY a JSON object of the form:
 
             const escape = (s) => String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 
+            const getOwnerBadge = (owner) => {
+                const badges = {
+                    'Human': 'bg-blue-500 text-white border-blue-600',
+                    'Agent': 'bg-purple-500 text-white border-purple-600',
+                    'Hybrid': 'bg-emerald-500 text-white border-emerald-600'
+                };
+                return badges[owner] || 'bg-gray-500 text-white border-gray-600';
+            };
+
             const renderSteps = (steps) => steps.map(s => `
-                <div class="border border-slate-200 rounded-xl p-4 bg-white">
+                <div class="border border-slate-200 rounded-lg p-3 bg-white shadow-sm">
                     <div class="flex items-start justify-between">
-                        <div class="pr-4">
-                            <div class="text-sm font-semibold text-slate-900 mb-1">${escape(s.step)}</div>
-                            <div class="text-slate-700">${escape(s.task)}</div>
-                            <div class="mt-3 grid grid-cols-2 gap-3 text-sm text-slate-600">
-                                <div>🎯 <span class="font-semibold text-slate-900">Target:</span> ${escape(s.successTarget)}</div>
-                                <div>⚖️ <span class="font-semibold text-slate-900">Rule:</span> ${escape(s.rule)}</div>
+                        <div class="pr-3">
+                            <div class="flex items-center gap-1.5 mb-1">
+                                <span class="text-xs font-medium px-2 py-1 rounded border ${getOwnerBadge(s.owner)}">${escape(s.owner)}</span>
+                                <span class="text-xs font-semibold text-slate-900">${escape(s.step)}</span>
+                            </div>
+                            <div class="text-slate-700 text-xs">${escape(s.task)}</div>
+                            <div class="mt-2 grid grid-cols-2 gap-2 text-xs text-slate-600">
+                                <div><span class="font-medium text-slate-800">Target:</span> ${escape(s.successTarget)}</div>
+                                <div><span class="font-medium text-slate-800">Rule:</span> ${escape(s.rule)}</div>
                             </div>
                         </div>
-                        <div class="text-right">
+                        <div class="text-right flex-shrink-0">
                             <div class="text-xs uppercase tracking-wide text-slate-500">Time</div>
-                            <div class="text-lg font-extrabold text-slate-900">${formatTime(s.estimatedTimeMinutes || 0)}</div>
-                            <div class="mt-1 text-xs uppercase tracking-wide text-slate-500">Cost</div>
-                            <div class="text-lg font-extrabold text-slate-900">${formatCurrency(s.estimatedCostUSD || 0)}</div>
+                            <div class="text-base font-semibold text-slate-900">${formatTime(s.estimatedTimeMinutes || 0)}</div>
                         </div>
                     </div>
                 </div>
@@ -993,68 +1018,80 @@ Return ONLY a JSON object of the form:
   <title>${escape(workflowName || 'Before vs After')} · Comparison</title>
   <script src="https://cdn.tailwindcss.com"><\/script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <style> body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#f8fafc 0%,#e2e8f0 100%);} </style>
+  <style> 
+    body{font-family:'Inter',sans-serif;background:#fcfcfc;font-size:14px;line-height:1.5;} 
+    .legend-item{display:inline-flex;align-items:center;margin-right:1rem;}
+  </style>
   <meta name="description" content="Before and After process comparison" />
   <meta name="robots" content="noindex" />
 </head>
 <body class="min-h-screen">
-  <div class="container mx-auto px-6 py-10 max-w-6xl">
-    <header class="mb-10">
-      <div class="bg-gradient-to-r from-sky-600 via-indigo-600 to-fuchsia-600 text-white py-12 px-8 rounded-3xl shadow-2xl">
-        <h1 class="text-4xl md:text-5xl font-extrabold mb-3">Before vs After — ${escape(workflowName || '')}</h1>
-        <p class="text-lg opacity-90">Current human-only process compared to the future AI-assisted process.</p>
+  <div class="container mx-auto px-6 py-6 max-w-6xl">
+    <header class="mb-6">
+      <div class="bg-gradient-to-r from-blue-900 via-purple-900 to-indigo-900 text-white py-8 px-6 rounded-lg shadow-sm relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+          <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <pattern id="grid2" width="10" height="10" patternUnits="userSpaceOnUse">
+              <path d="M 10 0 L 0 0 0 10" fill="none" stroke="white" stroke-width="0.5"/>
+            </pattern>
+            <rect width="100" height="100" fill="url(#grid2)" />
+          </svg>
+        </div>
+        <div class="relative flex items-center justify-center">
+          <svg class="w-8 h-8 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          <h1 class="text-2xl md:text-3xl font-semibold">Before vs After — ${escape(workflowName || '')}</h1>
+        </div>
+        <p class="text-sm text-center mt-2 opacity-90">Current human-only process compared to the future AI-assisted process.</p>
       </div>
     </header>
 
-    <section class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-8">
-      <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow">
-        <div class="text-slate-500 text-sm">Current Total</div>
-        <div class="text-2xl font-extrabold text-slate-900">${formatTime(totalsCurrent.minutes)}</div>
+    <div class="mb-4 flex items-center justify-center gap-4 text-xs">
+      <div class="legend-item"><span class="inline-block w-4 h-4 rounded bg-blue-500 border border-blue-600 mr-1"></span> Human</div>
+      <div class="legend-item"><span class="inline-block w-4 h-4 rounded bg-purple-500 border border-purple-600 mr-1"></span> Agent</div>
+      <div class="legend-item"><span class="inline-block w-4 h-4 rounded bg-emerald-500 border border-emerald-600 mr-1"></span> Hybrid</div>
+    </div>
+
+    <section class="grid grid-cols-1 lg:grid-cols-3 gap-3 mb-6">
+      <div class="bg-white border border-slate-200 rounded-lg p-4 shadow-sm">
+        <div class="text-slate-600 text-xs uppercase tracking-wide mb-1">Current Total Time</div>
+        <div class="text-xl font-semibold text-slate-900">${formatTime(totalsCurrent.minutes)}</div>
       </div>
-      <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow">
-        <div class="text-slate-500 text-sm">Future Total</div>
-        <div class="text-2xl font-extrabold text-slate-900">${formatTime(totalsFuture.minutes)}</div>
+      <div class="bg-white border border-slate-200 rounded-lg p-4 shadow-sm">
+        <div class="text-slate-600 text-xs uppercase tracking-wide mb-1">Future Total Time</div>
+        <div class="text-xl font-semibold text-slate-900">${formatTime(totalsFuture.minutes)}</div>
       </div>
-      <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-6 shadow">
-        <div class="text-emerald-700 text-sm">Estimated Savings</div>
-        <div class="text-2xl font-extrabold text-emerald-900">${formatTime(savingsMinutes)}</div>
+      <div class="bg-gradient-to-br from-emerald-500/10 to-teal-500/10 border border-emerald-500/20 rounded-lg p-4 shadow-sm">
+        <div class="text-emerald-700 text-xs uppercase tracking-wide mb-1">Estimated Time Savings</div>
+        <div class="text-xl font-semibold text-emerald-800">${formatTime(savingsMinutes)}</div>
       </div>
     </section>
 
-    <section class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-8">
-      <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow lg:col-start-3">
-        <div class="text-slate-500 text-sm">Estimated Compute Cost (Future)</div>
-        <div class="text-2xl font-extrabold text-slate-900">${formatCurrency(computeTotals.totalCost)}</div>
-        <div class="text-xs text-slate-500">${computeTotals.breakdownLabel}</div>
-      </div>
-    </section>
-
-    <section class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-      <div class="bg-white rounded-2xl p-6 shadow border border-slate-200">
-        <div class="flex items-center justify-between mb-4">
-          <h2 class="text-xl font-bold text-slate-900">Current Process — Human Only</h2>
-          <span class="text-sm text-slate-500">${escape(currentProcess.name || '')}</span>
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+      <div class="bg-white rounded-lg p-4 shadow-sm border border-slate-200">
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="text-base font-semibold text-slate-900">Current Process — Human Only</h2>
+          <span class="text-xs text-slate-500">${escape(currentProcess.name || '')}</span>
         </div>
-        <div class="space-y-4">${renderSteps(currentProcess.steps)}</div>
-        <div class="mt-6 pt-4 border-t border-slate-200">
-          <div class="text-sm text-slate-600 font-semibold mb-2">Assumptions</div>
-          <ul class="list-disc list-inside text-slate-700">${assumptions(currentProcess.assumptions)}</ul>
+        <div class="space-y-3">${renderSteps(currentProcess.steps)}</div>
+        <div class="mt-3 pt-3 border-t border-slate-200">
+          <div class="text-xs text-slate-600 font-medium mb-1">Assumptions</div>
+          <ul class="list-disc list-inside text-slate-700 text-xs">${assumptions(currentProcess.assumptions)}</ul>
         </div>
       </div>
-      <div class="bg-white rounded-2xl p-6 shadow border border-slate-200">
-        <div class="flex items-center justify-between mb-4">
-          <h2 class="text-xl font-bold text-slate-900">Future Process — AI-Assisted</h2>
-          <span class="text-sm text-slate-500">${escape(futureProcess.name || '')}</span>
+      <div class="bg-white rounded-lg p-4 shadow-sm border border-slate-200">
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="text-base font-semibold text-slate-900">Future Process — AI-Assisted</h2>
+          <span class="text-xs text-slate-500">${escape(futureProcess.name || '')}</span>
         </div>
-        <div class="space-y-4">${renderSteps(futureProcess.steps)}</div>
-        <div class="mt-6 pt-4 border-t border-slate-200">
-          <div class="text-sm text-slate-600 font-semibold mb-2">Assumptions</div>
-          <ul class="list-disc list-inside text-slate-700">${assumptions(futureProcess.assumptions)}</ul>
+        <div class="space-y-3">${renderSteps(futureProcess.steps)}</div>
+        <div class="mt-3 pt-3 border-t border-slate-200">
+          <div class="text-xs text-slate-600 font-medium mb-1">Assumptions</div>
+          <ul class="list-disc list-inside text-slate-700 text-xs">${assumptions(futureProcess.assumptions)}</ul>
         </div>
       </div>
     </section>
 
-    <footer class="text-center text-slate-500 mt-10">Generated by Work Chart</footer>
+    <footer class="text-center text-slate-500 mt-6 text-xs">Generated by Work Chart</footer>
   </div>
 </body>
 </html>`;
