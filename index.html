@@ -14,28 +14,34 @@
                 extend: {
                     colors: {
                         primary: {
-                            50: '#f0f9ff',
-                            100: '#e0f2fe',
-                            200: '#bae6fd',
-                            300: '#7dd3fc',
-                            400: '#38bdf8',
-                            500: '#0ea5e9',
-                            600: '#0284c7',
-                            700: '#0369a1',
-                            800: '#075985',
-                            900: '#0c4a6e',
+                            50: '#f0f4f8',
+                            100: '#d9e2ec',
+                            200: '#bcccdc',
+                            300: '#9fb3c8',
+                            400: '#829ab1',
+                            500: '#627d98',
+                            600: '#486581',
+                            700: '#334e68',
+                            800: '#243b53',
+                            900: '#102a43',
                         },
                         secondary: {
-                            50: '#f8fafc',
-                            100: '#f1f5f9',
-                            200: '#e2e8f0',
-                            300: '#cbd5e1',
-                            400: '#94a3b8',
-                            500: '#64748b',
-                            600: '#475569',
-                            700: '#334155',
-                            800: '#1e293b',
-                            900: '#0f172a',
+                            50: '#fcfcfc',
+                            100: '#f5f7fa',
+                            200: '#e4e7eb',
+                            300: '#cbd2d9',
+                            400: '#9aa5b1',
+                            500: '#7b8794',
+                            600: '#616e7c',
+                            700: '#52606d',
+                            800: '#3e4c59',
+                            900: '#323f4b',
+                        },
+                        accent: {
+                            green: '#00a878',
+                            teal: '#006d77',
+                            navy: '#102a43',
+                            gold: '#d4af37'
                         }
                     }
                 }
@@ -45,17 +51,19 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            background: #fcfcfc;
+            font-size: 14px;
+            line-height: 1.5;
         }
         .step-connector {
             position: absolute;
             top: 50%;
             left: 100%;
             transform: translate(0, -50%);
-            width: 50px;
-            height: 3px;
-            background: linear-gradient(90deg, #0ea5e9, #38bdf8);
-            border-radius: 2px;
+            width: 40px;
+            height: 2px;
+            background: #627d98;
+            border-radius: 1px;
         }
         .step-connector::after {
             content: '';
@@ -63,97 +71,93 @@
             top: 50%;
             right: -2px;
             transform: translateY(-50%);
-            border-top: 6px solid transparent;
-            border-bottom: 6px solid transparent;
-            border-left: 8px solid #38bdf8;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+            border-left: 7px solid #627d98;
         }
         .gradient-bg {
-            background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 50%, #8b5cf6 100%);
+            background: linear-gradient(135deg, #102a43 0%, #334e68 100%);
         }
         .glass-effect {
-            backdrop-filter: blur(16px);
-            background: rgba(255, 255, 255, 0.95);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        .comparison-table {
-            background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.98);
+            border: 1px solid #e4e7eb;
         }
         @media print {
             .no-print { display: none !important; }
         }
         .work-chart-card {
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
         }
         .work-chart-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
     </style>
 </head>
 <body class="min-h-screen">
 
-    <div class="container mx-auto px-4 py-6 md:py-10 max-w-6xl">
+    <div class="container mx-auto px-4 py-4 md:py-6 max-w-6xl">
         <!-- Top Nav -->
-        <nav class="flex items-center justify-between mb-8">
+        <nav class="flex items-center justify-between mb-6">
             <a href="./" class="flex items-center space-x-2">
-                <span class="inline-block w-8 h-8 rounded-xl gradient-bg"></span>
-                <span class="font-extrabold text-2xl text-secondary-900">The New Work Chart</span>
+                <span class="inline-block w-6 h-6 rounded gradient-bg"></span>
+                <span class="font-semibold text-lg text-secondary-900">Work Chart</span>
             </a>
-            <div class="flex items-center space-x-3">
-                <a href="about.html" class="px-4 py-2 rounded-xl bg-white/80 border border-secondary-200 text-secondary-800 hover:bg-white transition">About</a>
-                <a href="#" class="px-4 py-2 rounded-xl bg-secondary-900 text-white hover:bg-secondary-800 transition" onclick="document.getElementById('input-section').scrollIntoView({behavior:'smooth'})">Get Started</a>
+            <div class="flex items-center space-x-2">
+                <a href="about.html" class="px-3 py-1.5 text-sm rounded bg-white border border-secondary-200 text-secondary-700 hover:bg-secondary-50 transition">About</a>
+                <a href="#" class="px-3 py-1.5 text-sm rounded bg-primary-800 text-white hover:bg-primary-900 transition" onclick="document.getElementById('input-section').scrollIntoView({behavior:'smooth'})">Get Started</a>
             </div>
         </nav>
 
         <!-- Hero Section (focused) -->
-        <header class="text-center mb-10">
-            <div class="gradient-bg text-white py-14 px-6 rounded-3xl shadow-2xl">
-                <h1 class="text-4xl md:text-6xl font-extrabold mb-4">Design Workflows for Humans + AI</h1>
-                <p class="text-lg md:text-xl font-light max-w-3xl mx-auto leading-relaxed">
-                    Generate clear, beautiful work charts that map your process from trigger to outcome.
+        <header class="text-center mb-6">
+            <div class="gradient-bg text-white py-8 px-6 rounded-lg shadow-sm">
+                <h1 class="text-2xl md:text-3xl font-semibold mb-2">Design Workflows for Humans + AI</h1>
+                <p class="text-sm md:text-base font-light max-w-2xl mx-auto opacity-90">
+                    Generate clear work charts that map your process from trigger to outcome.
                 </p>
             </div>
         </header>
 
-        <main class="space-y-8">
+        <main class="space-y-5">
             <!-- Input Section -->
-            <div id="input-section" class="glass-effect p-8 rounded-3xl shadow-xl">
-                <h2 class="text-3xl font-bold mb-6 text-secondary-900">1. Describe Your Workflow</h2>
-                <p class="text-secondary-700 mb-6 text-lg">Enter a description of a project, job, or any workflow. For example: "A customer support process for handling refund requests."</p>
+            <div id="input-section" class="glass-effect p-5 rounded-lg shadow-sm">
+                <h2 class="text-lg font-semibold mb-3 text-secondary-900">1. Describe Your Workflow</h2>
+                <p class="text-secondary-600 mb-4 text-sm">Enter a description of a project, job, or any workflow. For example: "A customer support process for handling refund requests."</p>
                 <textarea 
                     id="workflow-input" 
-                    class="w-full h-40 p-6 border-2 border-secondary-200 rounded-2xl focus:ring-4 focus:ring-primary-200 focus:border-primary-500 transition-all duration-300 text-lg resize-none" 
+                    class="w-full h-28 p-3 border border-secondary-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition text-sm resize-none" 
                     placeholder="Describe the workflow here..."
                 ></textarea>
                 <button 
                     id="generate-btn" 
-                    class="mt-6 w-full bg-gradient-to-r from-primary-600 to-primary-700 text-white font-semibold py-4 px-8 rounded-2xl hover:from-primary-700 hover:to-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 transition-all duration-300 transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 text-lg shadow-lg"
+                    class="mt-4 w-full bg-primary-800 text-white font-medium py-2.5 px-6 rounded-lg hover:bg-primary-900 focus:outline-none focus:ring-2 focus:ring-primary-500 transition disabled:opacity-50 disabled:cursor-not-allowed text-sm shadow-sm"
                 >
                     <span id="btn-text">Generate Initial Chart & Questions</span>
                     <span id="btn-loader" class="hidden">
-                        <svg class="animate-spin h-6 w-6 text-white inline-block mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <svg class="animate-spin h-4 w-4 text-white inline-block mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>
-                        Generating with AI...
+                        Generating...
                     </span>
                 </button>
             </div>
 
             <!-- Questions Section -->
-            <div id="questions-section" class="hidden glass-effect p-8 rounded-3xl shadow-xl">
-                <h2 class="text-3xl font-bold mb-6 text-secondary-900">2. Answer Clarifying Questions</h2>
-                <p class="text-secondary-700 mb-8 text-lg">Your answers will help create a more accurate and detailed work chart.</p>
-                <div id="questions-container" class="space-y-6"></div>
-                <div class="mt-8 grid sm:grid-cols-2 gap-4">
+            <div id="questions-section" class="hidden glass-effect p-5 rounded-lg shadow-sm">
+                <h2 class="text-lg font-semibold mb-3 text-secondary-900">2. Answer Clarifying Questions</h2>
+                <p class="text-secondary-600 mb-5 text-sm">Your answers will help create a more accurate and detailed work chart.</p>
+                <div id="questions-container" class="space-y-4"></div>
+                <div class="mt-5 grid sm:grid-cols-2 gap-3">
                     <button 
                         id="autofill-btn" 
-                        class="w-full bg-gradient-to-r from-primary-600 to-primary-700 text-white font-semibold py-4 px-8 rounded-2xl hover:from-primary-700 hover:to-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 transition-all duration-300 transform hover:scale-[1.02] disabled:opacity-50 text-lg shadow-lg"
+                        class="w-full bg-primary-600 text-white font-medium py-2.5 px-6 rounded-lg hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 transition disabled:opacity-50 text-sm shadow-sm"
                     >
                         <span id="autofill-btn-text">Draft Answers with AI</span>
                         <span id="autofill-btn-loader" class="hidden">
-                            <svg class="animate-spin h-6 w-6 text-white inline-block mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <svg class="animate-spin h-4 w-4 text-white inline-block mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                                 <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                             </svg>
@@ -162,15 +166,15 @@
                     </button>
                     <button 
                         id="refine-btn" 
-                        class="w-full bg-gradient-to-r from-emerald-600 to-emerald-700 text-white font-semibold py-4 px-8 rounded-2xl hover:from-emerald-700 hover:to-emerald-800 focus:outline-none focus:ring-4 focus:ring-emerald-300 transition-all duration-300 transform hover:scale-[1.02] disabled:opacity-50 text-lg shadow-lg"
+                        class="w-full bg-accent-green text-white font-medium py-2.5 px-6 rounded-lg hover:bg-accent-teal focus:outline-none focus:ring-2 focus:ring-accent-green transition disabled:opacity-50 text-sm shadow-sm"
                     >
                          <span id="refine-btn-text">Refine Work Chart</span>
                          <span id="refine-btn-loader" class="hidden">
-                            <svg class="animate-spin h-6 w-6 text-white inline-block mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <svg class="animate-spin h-4 w-4 text-white inline-block mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                                 <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                             </svg>
-                            Refining with AI...
+                            Refining...
                         </span>
                     </button>
                 </div>
@@ -178,49 +182,49 @@
 
             <!-- Output Section -->
             <div id="output-section" class="hidden">
-                <div class="text-center mb-12">
-                    <h2 class="text-4xl font-bold mb-4 text-secondary-900">3. Your Generated Work Chart</h2>
-                    <p class="text-secondary-700 text-xl">A dynamic map of how your work gets done</p>
+                <div class="text-center mb-5">
+                    <h2 class="text-xl font-semibold mb-1 text-secondary-900">3. Your Generated Work Chart</h2>
+                    <p class="text-secondary-600 text-sm">A dynamic map of how your work gets done</p>
                 </div>
                 
-                <div class="glass-effect p-8 rounded-3xl shadow-xl">
-                    <div class="overflow-x-auto pb-6">
-                        <div id="chart-container" class="flex items-start justify-start space-x-16 p-6 min-w-max">
+                <div class="glass-effect p-5 rounded-lg shadow-sm">
+                    <div class="overflow-x-auto pb-4">
+                        <div id="chart-container" class="flex items-start justify-start space-x-16 p-4 min-w-max">
                             <!-- Chart will be generated here -->
                         </div>
                     </div>
                     
                     <!-- PDF Credits (hidden, only for PDF) -->
-                    <div id="pdf-credits" class="hidden text-center py-6 border-t border-secondary-200 mt-8">
-                        <p class="text-secondary-600 text-sm">Developed by Vivek + AI</p>
+                    <div id="pdf-credits" class="hidden text-center py-4 border-t border-secondary-200 mt-5">
+                        <p class="text-secondary-500 text-xs">Developed by Vivek + AI</p>
                     </div>
                     
-                    <div class="flex justify-center mt-8">
+                    <div class="flex justify-center mt-5 gap-2">
                         <button 
                             id="download-pdf-btn" 
-                            class="hidden bg-gradient-to-r from-purple-600 to-purple-700 text-white font-semibold py-4 px-8 rounded-2xl hover:from-purple-700 hover:to-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 transition-all duration-300 transform hover:scale-105 shadow-lg text-lg"
+                            class="hidden bg-primary-700 text-white font-medium py-2 px-4 rounded-lg hover:bg-primary-800 focus:outline-none focus:ring-2 focus:ring-primary-500 transition shadow-sm text-sm"
                         >
-                            📄 Download as PDF
+                            📄 Download PDF
                         </button>
                         <button 
                             id="download-html-btn" 
-                            class="hidden ml-4 bg-gradient-to-r from-emerald-600 to-emerald-700 text-white font-semibold py-4 px-8 rounded-2xl hover:from-emerald-700 hover:to-emerald-800 focus:outline-none focus:ring-4 focus:ring-emerald-300 transition-all duration-300 transform hover:scale-105 shadow-lg text-lg"
+                            class="hidden bg-accent-green text-white font-medium py-2 px-4 rounded-lg hover:bg-accent-teal focus:outline-none focus:ring-2 focus:ring-accent-green transition shadow-sm text-sm"
                         >
-                            🌐 Download Comparison HTML
+                            🌐 Download HTML
                         </button>
                     </div>
                 </div>
             </div>
             
             <!-- Error Section -->
-            <div id="error-box" class="hidden bg-red-50 border-2 border-red-200 text-red-800 px-6 py-4 rounded-2xl shadow-lg" role="alert">
+            <div id="error-box" class="hidden bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-lg shadow-sm text-sm" role="alert">
                 <div class="flex items-center">
-                    <svg class="w-6 h-6 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <svg class="w-4 h-4 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
                     </svg>
                     <div>
-                        <strong class="font-semibold">Error:</strong>
-                        <span class="block sm:inline ml-1" id="error-message"></span>
+                        <strong class="font-medium">Error:</strong>
+                        <span class="ml-1" id="error-message"></span>
                     </div>
                 </div>
             </div>
@@ -803,24 +807,24 @@ Return ONLY a JSON object of the form:
             const header = document.createElement('div');
             header.className = 'w-full mb-6';
             header.innerHTML = `
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 w-full">
-                    <div class="bg-white border-2 ${isDraft ? 'border-dashed border-secondary-300' : 'border-secondary-200'} rounded-2xl p-5 shadow">
-                        <div class="text-secondary-600 text-sm">Current Total Time</div>
-                        <div class="text-2xl font-extrabold text-secondary-900">${formatTime(totalsCurrent.minutes)}</div>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-3 w-full">
+                    <div class="bg-white border ${isDraft ? 'border-dashed border-secondary-300' : 'border-secondary-200'} rounded-lg p-4 shadow-sm">
+                        <div class="text-secondary-600 text-xs uppercase tracking-wide mb-1">Current Total Time</div>
+                        <div class="text-xl font-semibold text-secondary-900">${formatTime(totalsCurrent.minutes)}</div>
                     </div>
-                    <div class="bg-white border-2 ${isDraft ? 'border-dashed border-secondary-300' : 'border-secondary-200'} rounded-2xl p-5 shadow">
-                        <div class="text-secondary-600 text-sm">Future Total Time</div>
-                        <div class="text-2xl font-extrabold text-secondary-900">${formatTime(totalsFuture.minutes)}</div>
+                    <div class="bg-white border ${isDraft ? 'border-dashed border-secondary-300' : 'border-secondary-200'} rounded-lg p-4 shadow-sm">
+                        <div class="text-secondary-600 text-xs uppercase tracking-wide mb-1">Future Total Time</div>
+                        <div class="text-xl font-semibold text-secondary-900">${formatTime(totalsFuture.minutes)}</div>
                     </div>
-                    <div class="bg-emerald-50 border-2 border-emerald-200 rounded-2xl p-5 shadow">
-                        <div class="text-emerald-700 text-sm">Estimated Time Savings</div>
-                        <div class="text-2xl font-extrabold text-emerald-900">${formatTime(savingsMinutes)}</div>
+                    <div class="bg-gradient-to-br from-accent-green/10 to-accent-teal/10 border border-accent-green/20 rounded-lg p-4 shadow-sm">
+                        <div class="text-accent-teal text-xs uppercase tracking-wide mb-1">Estimated Time Savings</div>
+                        <div class="text-xl font-semibold text-accent-teal">${formatTime(savingsMinutes)}</div>
                     </div>
                 </div>
             `;
 
             const grid = document.createElement('div');
-            grid.className = 'grid grid-cols-1 lg:grid-cols-2 gap-8 w-full';
+            grid.className = 'grid grid-cols-1 lg:grid-cols-2 gap-5 w-full';
 
             grid.appendChild(renderProcessColumn(currentProcess, 'Current Process — Human Only', true, isDraft));
             grid.appendChild(renderProcessColumn(futureProcess, 'Future Process — AI-Assisted', false, isDraft));
@@ -834,45 +838,45 @@ Return ONLY a JSON object of the form:
             col.className = '';
 
             const container = document.createElement('div');
-            container.className = `bg-white p-6 rounded-2xl shadow-lg border-2 ${isDraft ? 'border-dashed border-secondary-300' : 'border-secondary-200'}`;
+            container.className = `bg-white p-4 rounded-lg shadow-sm border ${isDraft ? 'border-dashed border-secondary-300' : 'border-secondary-200'}`;
 
             const heading = document.createElement('div');
-            heading.className = 'flex items-center justify-between mb-4';
+            heading.className = 'flex items-center justify-between mb-3';
             heading.innerHTML = `
-                <h3 class="text-xl font-bold text-secondary-900">${title}</h3>
-                <span class="text-sm text-secondary-600">${process.name || ''}</span>
+                <h3 class="text-base font-semibold text-secondary-900">${title}</h3>
+                <span class="text-xs text-secondary-500">${process.name || ''}</span>
             `;
 
             const list = document.createElement('div');
-            list.className = 'space-y-4';
+            list.className = 'space-y-3';
 
             process.steps.forEach((step, idx) => {
                 const ownerColors = {
-                    'Human': 'bg-blue-100 text-blue-800 border-blue-200',
-                    'Agent': 'bg-purple-100 text-purple-800 border-purple-200',
-                    'Hybrid': 'bg-emerald-100 text-emerald-800 border-emerald-200'
+                    'Human': 'bg-primary-100 text-primary-800 border-primary-200',
+                    'Agent': 'bg-secondary-100 text-secondary-700 border-secondary-200',
+                    'Hybrid': 'bg-accent-green/10 text-accent-teal border-accent-green/20'
                 };
-                const ownerColor = ownerColors[step.owner] || 'bg-secondary-100 text-secondary-800 border-secondary-200';
+                const ownerColor = ownerColors[step.owner] || 'bg-secondary-100 text-secondary-700 border-secondary-200';
 
                 const card = document.createElement('div');
-                card.className = 'work-chart-card border-2 border-secondary-200 rounded-xl p-4';
+                card.className = 'work-chart-card border border-secondary-200 rounded-lg p-3 bg-white';
                 card.innerHTML = `
                     <div class="flex items-start justify-between">
-                        <div class="pr-4">
-                            <div class="flex items-center gap-2 mb-1">
-                                <span class="text-xs font-semibold px-2 py-0.5 rounded-full border ${ownerColor}">${step.owner}</span>
-                                <span class="text-sm font-semibold text-secondary-900">${step.step}</span>
+                        <div class="pr-3">
+                            <div class="flex items-center gap-1.5 mb-1">
+                                <span class="text-xs font-medium px-1.5 py-0.5 rounded border ${ownerColor}">${step.owner}</span>
+                                <span class="text-xs font-semibold text-secondary-900">${step.step}</span>
                             </div>
-                            <div class="text-secondary-800 font-medium">${step.task}</div>
-                            <div class="grid grid-cols-2 gap-3 mt-3 text-sm text-secondary-700">
-                                <div>🎯 <span class="font-semibold text-secondary-900">Target:</span> ${step.successTarget}</div>
-                                <div>⚖️ <span class="font-semibold text-secondary-900">Rule:</span> ${step.rule}</div>
+                            <div class="text-secondary-700 text-xs font-normal">${step.task}</div>
+                            <div class="grid grid-cols-2 gap-2 mt-2 text-xs text-secondary-600">
+                                <div><span class="font-medium text-secondary-800">Target:</span> ${step.successTarget}</div>
+                                <div><span class="font-medium text-secondary-800">Rule:</span> ${step.rule}</div>
                             </div>
                         </div>
-                        <div class="text-right">
-                            <div class="text-sm text-secondary-600">Time</div>
-                            <div class="text-lg font-extrabold text-secondary-900">${formatTime(step.estimatedTimeMinutes || 0)}</div>
-                            ${step.compute ? `<div class=\"mt-2 text-xs text-secondary-600\">${step.compute.modelId} · in ${formatTokens(step.compute.estimatedInputTokens)} · out ${formatTokens(step.compute.estimatedOutputTokens)}</div>` : ''}
+                        <div class="text-right flex-shrink-0">
+                            <div class="text-xs text-secondary-500 uppercase tracking-wide">Time</div>
+                            <div class="text-base font-semibold text-secondary-900">${formatTime(step.estimatedTimeMinutes || 0)}</div>
+                            ${step.compute ? `<div class=\"mt-1 text-xs text-secondary-500\">${step.compute.modelId}</div>` : ''}
                         </div>
                     </div>
                 `;
@@ -882,13 +886,13 @@ Return ONLY a JSON object of the form:
             const totals = calculateTotals(process.steps || []);
             const computeTotals = calculateComputeTotals(process.steps || []);
             const footer = document.createElement('div');
-            footer.className = 'mt-4 pt-4 border-t border-secondary-200 flex items-center justify-between';
+            footer.className = 'mt-3 pt-3 border-t border-secondary-200 flex items-center justify-between';
             footer.innerHTML = `
-                <div class="text-sm text-secondary-700">Assumptions: ${(process.assumptions || []).slice(0,3).join(' • ')}</div>
+                <div class="text-xs text-secondary-600">Assumptions: ${(process.assumptions || []).slice(0,2).join(' • ')}</div>
                 <div class="text-right">
-                    <div class="text-sm text-secondary-600">Total Time</div>
-                    <div class="text-lg font-extrabold text-secondary-900">${formatTime(totals.minutes)}</div>
-                    ${computeTotals.totalCost ? `<div class=\"text-sm text-secondary-600 mt-1\">Compute Cost</div><div class=\"text-lg font-extrabold text-secondary-900\">${formatCurrency(computeTotals.totalCost)}</div>` : ''}
+                    <div class="text-xs text-secondary-500 uppercase tracking-wide">Total Time</div>
+                    <div class="text-base font-semibold text-secondary-900">${formatTime(totals.minutes)}</div>
+                    ${computeTotals.totalCost ? `<div class=\"text-xs text-secondary-500 mt-1 uppercase tracking-wide\">Compute Cost</div><div class=\"text-base font-semibold text-secondary-900\">${formatCurrency(computeTotals.totalCost)}</div>` : ''}
                 </div>
             `;
 
@@ -1062,8 +1066,8 @@ Return ONLY a JSON object of the form:
                 const questionDiv = document.createElement('div');
                 questionDiv.className = 'question-item';
                 questionDiv.innerHTML = `
-                    <label for="question-${index}" class="block text-lg font-semibold text-secondary-800 mb-3">${q}</label>
-                    <input type="text" id="question-${index}" class="w-full p-4 border-2 border-secondary-200 rounded-xl focus:ring-4 focus:ring-primary-200 focus:border-primary-500 transition-all duration-300 text-lg">
+                    <label for="question-${index}" class="block text-sm font-medium text-secondary-800 mb-2">${q}</label>
+                    <input type="text" id="question-${index}" class="w-full p-2.5 border border-secondary-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition text-sm">
                 `;
                 questionsContainer.appendChild(questionDiv);
             });
