@@ -145,6 +145,43 @@
                     class="w-full h-28 p-3 border border-secondary-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition text-sm resize-none" 
                     placeholder="Describe the workflow here..."
                 ></textarea>
+                
+                <!-- Model Selection -->
+                <div class="mt-4">
+                    <label for="model-select" class="block text-sm font-medium text-secondary-800 mb-2 flex items-center justify-between">
+                        <span>Select AI Model</span>
+                        <button 
+                            id="refresh-models-btn" 
+                            class="text-xs px-2 py-1 bg-primary-50 hover:bg-primary-100 text-primary-700 rounded border border-primary-200 transition"
+                            title="Refresh model list from API"
+                        >
+                            🔄 Refresh
+                        </button>
+                    </label>
+                    <select 
+                        id="model-select" 
+                        class="w-full p-2.5 border border-secondary-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition text-sm bg-white"
+                    >
+                        <option value="">Loading models...</option>
+                    </select>
+                    <p class="mt-1 text-xs text-secondary-500" id="model-info">
+                        Fetching latest models from Venice API...
+                    </p>
+                </div>
+                
+                <!-- Timer Display -->
+                <div id="generation-timer" class="hidden mt-3 text-center">
+                    <div class="inline-flex items-center bg-primary-50 border border-primary-200 rounded-lg px-4 py-2">
+                        <svg class="animate-spin h-4 w-4 text-primary-700 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        <span class="text-sm font-medium text-primary-900">
+                            Generating: <span id="timer-value" class="font-mono">0.0</span>s
+                        </span>
+                    </div>
+                </div>
+                
                 <button 
                     id="generate-btn" 
                     class="mt-4 w-full bg-primary-800 text-white font-medium py-2.5 px-6 rounded-lg hover:bg-primary-900 focus:outline-none focus:ring-2 focus:ring-primary-500 transition disabled:opacity-50 disabled:cursor-not-allowed text-sm shadow-sm"
@@ -229,6 +266,61 @@
                         </button>
                     </div>
                 </div>
+                
+                <!-- AI Agents & Tools Section -->
+                <div id="ai-tools-section" class="hidden glass-effect p-5 rounded-lg shadow-sm mt-5">
+                    <h3 class="text-lg font-semibold mb-3 text-secondary-900">🤖 AI Agents & Tools Required</h3>
+                    <p class="text-secondary-600 mb-4 text-sm">The following AI capabilities are needed for the AI-assisted workflow:</p>
+                    <div id="ai-tools-container" class="space-y-3">
+                        <!-- AI tools will be listed here -->
+                    </div>
+                </div>
+                
+                <!-- AI Methodology Explanation -->
+                <div class="glass-effect p-5 rounded-lg shadow-sm mt-5">
+                    <h3 class="text-lg font-semibold mb-3 text-secondary-900">🧠 How This AI-Augmented Work Chart Was Constructed</h3>
+                    <div class="space-y-4 text-sm text-secondary-700">
+                        <div class="bg-white border border-secondary-200 rounded-lg p-4">
+                            <h4 class="font-semibold text-secondary-900 mb-2 flex items-center">
+                                <span class="text-xl mr-2">1️⃣</span> Workflow Analysis
+                            </h4>
+                            <p>The AI model analyzes your workflow description to identify discrete tasks, dependencies, decision points, and handoffs. It constructs both a baseline (current human-only) process and an optimized (AI-assisted) process.</p>
+                        </div>
+                        
+                        <div class="bg-white border border-secondary-200 rounded-lg p-4">
+                            <h4 class="font-semibold text-secondary-900 mb-2 flex items-center">
+                                <span class="text-xl mr-2">2️⃣</span> Human-AI Task Allocation
+                            </h4>
+                            <p>Each step is classified as <strong class="text-blue-700">Human</strong> (requires judgment, creativity, or physical presence), <strong class="text-purple-700">Agent</strong> (fully automatable with AI), or <strong class="text-emerald-700">Hybrid</strong> (AI-assisted but human-supervised). This allocation considers factors like task complexity, error tolerance, and regulatory requirements.</p>
+                        </div>
+                        
+                        <div class="bg-white border border-secondary-200 rounded-lg p-4">
+                            <h4 class="font-semibold text-secondary-900 mb-2 flex items-center">
+                                <span class="text-xl mr-2">3️⃣</span> Resource Estimation
+                            </h4>
+                            <p>For each step, the system estimates time requirements and, for AI-powered tasks, computes token usage and cost based on the selected language model. This provides realistic ROI projections for implementing AI augmentation.</p>
+                        </div>
+                        
+                        <div class="bg-white border border-secondary-200 rounded-lg p-4">
+                            <h4 class="font-semibold text-secondary-900 mb-2 flex items-center">
+                                <span class="text-xl mr-2">4️⃣</span> Iterative Refinement
+                            </h4>
+                            <p>The AI generates clarifying questions to resolve ambiguities in the workflow. Your answers are used to refine estimates, add missing steps, and improve the accuracy of the task allocation and resource projections.</p>
+                        </div>
+                        
+                        <div class="bg-white border border-secondary-200 rounded-lg p-4">
+                            <h4 class="font-semibold text-secondary-900 mb-2 flex items-center">
+                                <span class="text-xl mr-2">5️⃣</span> Tool & Agent Identification
+                            </h4>
+                            <p>For Agent and Hybrid steps, the system identifies specific AI capabilities required: language models for content generation, vision models for image processing, retrieval systems for knowledge access, and function-calling agents for API integrations. This creates a clear implementation roadmap.</p>
+                        </div>
+                        
+                        <div class="bg-gradient-to-r from-primary-50 to-accent-green/10 border border-primary-200 rounded-lg p-4 mt-4">
+                            <h4 class="font-semibold text-secondary-900 mb-2">🎯 Work Chart Ethos</h4>
+                            <p class="text-secondary-800">The Work Chart methodology is built on the principle that <strong>AI should augment human capabilities, not replace them</strong>. We focus on identifying tasks where AI can handle repetitive, data-intensive, or speed-critical work—freeing humans to focus on strategy, creativity, and relationship-building. Every workflow is designed with clear success targets and decision rules, ensuring accountability and measurable outcomes.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
             
             <!-- Error Section -->
@@ -262,6 +354,13 @@
         const pdfCredits = document.getElementById('pdf-credits');
         const errorBox = document.getElementById('error-box');
         const errorMessage = document.getElementById('error-message');
+        const modelSelect = document.getElementById('model-select');
+        const refreshModelsBtn = document.getElementById('refresh-models-btn');
+        const modelInfo = document.getElementById('model-info');
+        const generationTimer = document.getElementById('generation-timer');
+        const timerValue = document.getElementById('timer-value');
+        const aiToolsSection = document.getElementById('ai-tools-section');
+        const aiToolsContainer = document.getElementById('ai-tools-container');
         
         const btnText = document.getElementById('btn-text');
         const btnLoader = document.getElementById('btn-loader');
@@ -274,11 +373,179 @@
         let initialComparison = null;
         let currentWorkflowName = '';
         let analysisUsageByModel = {}; // accumulates { [modelId]: { inputTokens, outputTokens, calls } }
+        let timerInterval = null;
+        let availableModels = []; // Store models fetched from API
 
         // Venice API Configuration
         const API_KEY = "ntmhtbP2fr_pOQsmuLPuN_nm6lm2INWKiNcvrdEfEC";
         const API_URL = "https://api.venice.ai/api/v1/chat/completions";
-        const MODEL = "hermes-3-llama-3.1-405b"; // Using Hermes 3 Llama 3.1 405B
+        const MODELS_API_URL = "https://api.venice.ai/api/v1/models";
+        const DEFAULT_MODEL = "llama-3.3-70b"; // Default fallback
+        
+        // Fetch available models from Venice API
+        async function fetchAvailableModels() {
+            try {
+                refreshModelsBtn.disabled = true;
+                refreshModelsBtn.textContent = '⏳ Loading...';
+                
+                const response = await fetch(MODELS_API_URL, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch models: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                availableModels = data.data || [];
+                
+                // Update the global pricing dictionary
+                const newPricing = {};
+                availableModels.forEach(model => {
+                    if (model.model_spec && model.model_spec.pricing) {
+                        newPricing[model.id] = {
+                            in: model.model_spec.pricing.input.usd,
+                            out: model.model_spec.pricing.output.usd,
+                            name: model.model_spec.name || model.id,
+                            contextTokens: model.model_spec.availableContextTokens || 0,
+                            capabilities: model.model_spec.capabilities || {},
+                            traits: model.model_spec.traits || []
+                        };
+                    }
+                });
+                
+                // Update the global pricing object
+                Object.assign(MODEL_PRICING_PER_MTOK, newPricing);
+                
+                populateModelDropdown();
+                
+                modelInfo.textContent = `✅ ${availableModels.length} models loaded`;
+                refreshModelsBtn.textContent = '🔄 Refresh';
+                refreshModelsBtn.disabled = false;
+                
+                return true;
+            } catch (error) {
+                console.error('Error fetching models:', error);
+                modelInfo.textContent = `⚠️ Could not load models: ${error.message}`;
+                refreshModelsBtn.textContent = '🔄 Retry';
+                refreshModelsBtn.disabled = false;
+                
+                // Populate with fallback models
+                populateFallbackModels();
+                return false;
+            }
+        }
+        
+        function populateModelDropdown() {
+            modelSelect.innerHTML = '';
+            
+            if (availableModels.length === 0) {
+                modelSelect.innerHTML = '<option value="">No models available</option>';
+                return;
+            }
+            
+            // Sort models by traits and pricing
+            const sortedModels = [...availableModels].sort((a, b) => {
+                // Prioritize default models
+                const aIsDefault = a.model_spec?.traits?.includes('default');
+                const bIsDefault = b.model_spec?.traits?.includes('default');
+                if (aIsDefault && !bIsDefault) return -1;
+                if (!aIsDefault && bIsDefault) return 1;
+                
+                // Then by pricing (mid-tier first)
+                const aPrice = a.model_spec?.pricing?.input?.usd || 0;
+                const bPrice = b.model_spec?.pricing?.input?.usd || 0;
+                return bPrice - aPrice;
+            });
+            
+            sortedModels.forEach(model => {
+                const option = document.createElement('option');
+                option.value = model.id;
+                
+                const spec = model.model_spec || {};
+                const name = spec.name || model.id;
+                const traits = spec.traits || [];
+                const pricing = spec.pricing || {};
+                const inputPrice = pricing.input?.usd || 0;
+                const outputPrice = pricing.output?.usd || 0;
+                
+                // Build label with useful info
+                let label = name;
+                
+                if (traits.includes('default')) {
+                    label += ' — Default';
+                } else if (traits.includes('fastest')) {
+                    label += ' — Fastest';
+                } else if (traits.includes('most_uncensored')) {
+                    label += ' — Uncensored';
+                } else if (traits.includes('default_code')) {
+                    label += ' — Best for Code';
+                } else if (traits.includes('default_vision')) {
+                    label += ' — Vision Support';
+                }
+                
+                option.textContent = label;
+                
+                // Set default selection
+                if (traits.includes('default') || model.id === DEFAULT_MODEL) {
+                    option.selected = true;
+                }
+                
+                modelSelect.appendChild(option);
+            });
+            
+            // Update info text
+            const selectedModel = sortedModels.find(m => m.id === modelSelect.value);
+            if (selectedModel && selectedModel.model_spec) {
+                updateModelInfo(selectedModel);
+            }
+        }
+        
+        function populateFallbackModels() {
+            // Fallback to hardcoded models if API fails
+            modelSelect.innerHTML = `
+                <option value="llama-3.3-70b" selected>Llama 3.3 70B — Default (Best Balance)</option>
+                <option value="qwen3-235b">Venice Large 1.1 — Most Capable</option>
+                <option value="mistral-31-24b">Venice Medium — Vision Support</option>
+                <option value="llama-3.2-3b">Llama 3.2 3B — Fastest</option>
+                <option value="qwen3-4b">Venice Small — Efficient</option>
+                <option value="venice-uncensored">Venice Uncensored 1.1</option>
+            `;
+            modelInfo.textContent = '⚠️ Using cached models (API unavailable)';
+        }
+        
+        function updateModelInfo(model) {
+            const spec = model.model_spec || {};
+            const pricing = spec.pricing || {};
+            const inputPrice = (pricing.input?.usd || 0).toFixed(2);
+            const outputPrice = (pricing.output?.usd || 0).toFixed(2);
+            const contextTokens = spec.availableContextTokens || 0;
+            const contextK = Math.round(contextTokens / 1024);
+            
+            modelInfo.innerHTML = `
+                💰 $${inputPrice} / $${outputPrice} per 1M tokens (in/out) • 
+                📝 ${contextK}K context
+            `;
+        }
+        
+        // Update model info when selection changes
+        modelSelect.addEventListener('change', () => {
+            const selectedModel = availableModels.find(m => m.id === modelSelect.value);
+            if (selectedModel) {
+                updateModelInfo(selectedModel);
+            }
+        });
+        
+        // Refresh models button
+        refreshModelsBtn.addEventListener('click', () => {
+            fetchAvailableModels();
+        });
+        
+        // Fetch models on page load
+        fetchAvailableModels();
         
         // Comparison schema (documentation only)
         const comparisonInitialSchema = {
@@ -346,22 +613,14 @@
             required: ["currentProcess","futureProcess"]
         };
 
-        // Venice model pricing (per 1M tokens, input/output)
+        // Venice model pricing (per 1M tokens, input/output) - Updated from API 2025
         const MODEL_PRICING_PER_MTOK = {
-            'venice-uncensored': { in: 0.20, out: 0.90 },
-            'qwen-2.5-qwq-32b': { in: 0.50, out: 2.00 },
-            'qwen3-4b': { in: 0.05, out: 0.15 },
-            'mistral-32-24b': { in: 0.50, out: 2.00 },
-            'mistral-31-24b': { in: 0.50, out: 2.00 },
-            'qwen3-235b': { in: 0.90, out: 4.50 },
-            'llama-3.2-3b': { in: 0.15, out: 0.60 },
-            'llama-3.3-70b': { in: 0.70, out: 2.80 },
-            'llama-3.1-405b': { in: 1.50, out: 6.00 },
-            'dolphin-2.9.2-qwen2-72b': { in: 0.70, out: 2.80 },
-            'qwen-2.5-vl': { in: 0.70, out: 2.80 },
-            'qwen-2.5-coder-32b': { in: 0.50, out: 2.00 },
-            'deepseek-r1-671b': { in: 3.50, out: 14.00 },
-            'deepseek-coder-v2-lite': { in: 0.50, out: 2.00 }
+            'venice-uncensored': { in: 0.20, out: 0.90, name: 'Venice Uncensored 1.1' },
+            'qwen3-4b': { in: 0.05, out: 0.15, name: 'Venice Small' },
+            'mistral-31-24b': { in: 0.50, out: 2.00, name: 'Venice Medium' },
+            'qwen3-235b': { in: 0.90, out: 4.50, name: 'Venice Large 1.1' },
+            'llama-3.2-3b': { in: 0.15, out: 0.60, name: 'Llama 3.2 3B' },
+            'llama-3.3-70b': { in: 0.70, out: 2.80, name: 'Llama 3.3 70B' }
         };
 
         function computeCostForModel(modelId, inputTokens, outputTokens) {
@@ -385,6 +644,27 @@
             return { totalCost, breakdownLabel };
         }
 
+        function startTimer() {
+            let startTime = Date.now();
+            generationTimer.classList.remove('hidden');
+            timerValue.textContent = '0.0';
+            
+            timerInterval = setInterval(() => {
+                const elapsed = (Date.now() - startTime) / 1000;
+                timerValue.textContent = elapsed.toFixed(1);
+            }, 100);
+        }
+        
+        function stopTimer() {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+            setTimeout(() => {
+                generationTimer.classList.add('hidden');
+            }, 2000);
+        }
+
         async function makeApiCall(systemPrompt, userPrompt, schema, modelOverride) {
             let retries = 3;
             let delay = 1000;
@@ -392,7 +672,7 @@
             while (retries > 0) {
                 try {
                     const payload = {
-                        model: modelOverride || MODEL,
+                        model: modelOverride || modelSelect.value || DEFAULT_MODEL,
                         messages: [
                             {
                                 role: "system",
@@ -442,7 +722,7 @@
                     
                     // Track token usage for analysis cost
                     try {
-                        const modelId = result.model || modelOverride || MODEL;
+                        const modelId = result.model || modelOverride || modelSelect.value || DEFAULT_MODEL;
                         const usage = result.usage || result.choices?.[0]?.usage || {};
                         const inputTokens = usage.prompt_tokens ?? usage.input_tokens ?? usage.promptTokens ?? usage.input ?? 0;
                         const outputTokens = usage.completion_tokens ?? usage.output_tokens ?? usage.completionTokens ?? usage.output ?? 0;
@@ -478,6 +758,7 @@
             currentWorkflowName = userInput.substring(0, 50).replace(/[^a-zA-Z0-9\s]/g, '').trim();
 
             setLoadingState(generateBtn, btnLoader, btnText, true);
+            startTimer();
             hideError();
             
             const systemPrompt = `You are an expert business process analyst. Based on the workflow description, produce BOTH the current human-only process and a future AI-assisted process.
@@ -485,13 +766,13 @@ Rules:
 - The current process must assign owner = "Human" for every step.
 - The future process can use owner = "Human", "Agent", or "Hybrid".
 - For every step, estimate time in minutes. Do NOT include human labor cost.
-- For Agent or Hybrid steps, include a compute object: { "modelId": string, "estimatedInputTokens": number, "estimatedOutputTokens": number, "notes": string }.
+- For Agent or Hybrid steps, include a compute object: { "modelId": string, "estimatedInputTokens": number, "estimatedOutputTokens": number, "notes": string, "tools": ["list of tools/capabilities needed"] }.
 - Keep step lists aligned where possible so comparisons are clear.
 - Ask enough clarifying questions to resolve ambiguities (no hard limit; include as many as needed).
 Return ONLY JSON with this exact structure:
 {
   "currentProcess": {"name": "string", "steps": [{"step": "string", "task": "string", "owner": "Human", "successTarget": "string", "rule": "string", "estimatedTimeMinutes": number}], "assumptions": ["string"]},
-  "futureProcess": {"name": "string", "steps": [{"step": "string", "task": "string", "owner": "Human|Agent|Hybrid", "successTarget": "string", "rule": "string", "estimatedTimeMinutes": number, "compute": {"modelId": "string", "estimatedInputTokens": number, "estimatedOutputTokens": number, "notes": "string"}}], "assumptions": ["string"]},
+  "futureProcess": {"name": "string", "steps": [{"step": "string", "task": "string", "owner": "Human|Agent|Hybrid", "successTarget": "string", "rule": "string", "estimatedTimeMinutes": number, "compute": {"modelId": "string", "estimatedInputTokens": number, "estimatedOutputTokens": number, "notes": "string", "tools": ["string"]}}], "assumptions": ["string"]},
   "questions": ["string"]
 }`;
 
@@ -499,12 +780,15 @@ Return ONLY JSON with this exact structure:
             
             const data = await makeApiCall(systemPrompt, userPrompt, comparisonInitialSchema);
 
+            stopTimer();
+            
             if (data) {
                 initialComparison = data;
                 // for autofill context
                 initialWorkChart = data.futureProcess?.steps?.map(s => ({ step: s.step, task: s.task, owner: s.owner, successTarget: s.successTarget, rule: s.rule })) || [];
                 renderComparison(initialComparison, true);
                 renderQuestions(data.questions || []);
+                renderAITools(data.futureProcess);
                 outputSection.classList.remove('hidden');
                 questionsSection.classList.remove('hidden');
                 downloadPdfBtn.classList.remove('hidden');
@@ -533,17 +817,18 @@ Return ONLY JSON with this exact structure:
             }
             
             setLoadingState(refineBtn, refineBtnLoader, refineBtnText, true);
+            startTimer();
             hideError();
 
             const systemPrompt = `You are an expert business process analyst. Refine BOTH the current human-only process and the future AI-assisted process using the user's answers.
 Constraints:
 - Current process must keep owner = "Human" for all steps.
 - Estimate time (minutes) for each step. Do NOT include human labor cost.
-- For Agent or Hybrid steps, include/adjust the compute object: { modelId, estimatedInputTokens, estimatedOutputTokens, notes }.
+- For Agent or Hybrid steps, include/adjust the compute object: { modelId, estimatedInputTokens, estimatedOutputTokens, notes, tools: ["list of tools/capabilities needed"] }.
 Return ONLY JSON of the form:
 {
   "currentProcess": {"name": "string", "steps": [{"step": "string", "task": "string", "owner": "Human", "successTarget": "string", "rule": "string", "estimatedTimeMinutes": number}], "assumptions": ["string"]},
-  "futureProcess": {"name": "string", "steps": [{"step": "string", "task": "string", "owner": "Human|Agent|Hybrid", "successTarget": "string", "rule": "string", "estimatedTimeMinutes": number, "compute": {"modelId": "string", "estimatedInputTokens": number, "estimatedOutputTokens": number, "notes": "string"}}], "assumptions": ["string"]}
+  "futureProcess": {"name": "string", "steps": [{"step": "string", "task": "string", "owner": "Human|Agent|Hybrid", "successTarget": "string", "rule": "string", "estimatedTimeMinutes": number, "compute": {"modelId": "string", "estimatedInputTokens": number, "estimatedOutputTokens": number, "notes": "string", "tools": ["string"]}}], "assumptions": ["string"]}
 }`;
 
             const userPrompt = `Original Workflow: "${workflowInput.value.trim()}"
@@ -556,9 +841,12 @@ ${answers.map(a => `- Q: ${a.question}\n  A: ${a.answer}`).join('\n')}`;
 
             const data = await makeApiCall(systemPrompt, userPrompt, comparisonRefinedSchema);
 
+            stopTimer();
+
             if (data && data.currentProcess && data.futureProcess) {
                 initialComparison = data;
                 renderComparison(data, false);
+                renderAITools(data.futureProcess);
                 questionsSection.classList.add('hidden');
                 downloadPdfBtn.classList.remove('hidden');
                 downloadHtmlBtn.classList.remove('hidden');
@@ -576,6 +864,7 @@ ${answers.map(a => `- Q: ${a.question}\n  A: ${a.answer}`).join('\n')}`;
             }
 
             setLoadingState(autofillBtn, autofillBtnLoader, autofillBtnText, true);
+            startTimer();
             hideError();
 
             const systemPrompt = `You are assisting with workflow clarification. For the given original workflow and the initial work chart steps, draft concise, practical first-pass answers to each question. Keep each answer to one sentence, be specific, and assume reasonable defaults if unspecified.`;
@@ -592,6 +881,9 @@ Return ONLY a JSON object of the form:
 {"answers": ["answer 1", "answer 2", ...]}`;
 
             const resp = await makeApiCall(systemPrompt, userPrompt, null, 'mistral-31-24b');
+            
+            stopTimer();
+            
             if (resp && Array.isArray(resp.answers)) {
                 const inputs = Array.from(document.querySelectorAll('.question-item input'));
                 inputs.forEach((inp, idx) => {
@@ -757,6 +1049,99 @@ Return ONLY a JSON object of the form:
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
         });
+
+        function renderAITools(futureProcess) {
+            if (!futureProcess || !futureProcess.steps) return;
+            
+            const toolsMap = new Map();
+            const agentSteps = [];
+            
+            futureProcess.steps.forEach(step => {
+                if ((step.owner === 'Agent' || step.owner === 'Hybrid') && step.compute) {
+                    agentSteps.push({
+                        step: step.step,
+                        owner: step.owner,
+                        modelId: step.compute.modelId,
+                        notes: step.compute.notes,
+                        tools: step.compute.tools || []
+                    });
+                    
+                    // Collect unique tools
+                    if (step.compute.tools && Array.isArray(step.compute.tools)) {
+                        step.compute.tools.forEach(tool => {
+                            if (!toolsMap.has(tool)) {
+                                toolsMap.set(tool, []);
+                            }
+                            toolsMap.get(tool).push(step.step);
+                        });
+                    }
+                }
+            });
+            
+            if (agentSteps.length === 0) {
+                aiToolsSection.classList.add('hidden');
+                return;
+            }
+            
+            aiToolsSection.classList.remove('hidden');
+            aiToolsContainer.innerHTML = '';
+            
+            // Render by step
+            agentSteps.forEach(item => {
+                const ownerColor = item.owner === 'Agent' ? 'bg-purple-500' : 'bg-emerald-500';
+                const card = document.createElement('div');
+                card.className = 'bg-white border border-secondary-200 rounded-lg p-4';
+                card.innerHTML = `
+                    <div class="flex items-start gap-3">
+                        <div class="flex-shrink-0 mt-1">
+                            <div class="w-10 h-10 ${ownerColor} rounded-lg flex items-center justify-center text-white font-semibold">
+                                ${item.owner === 'Agent' ? '🤖' : '🤝'}
+                            </div>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="text-xs font-medium px-2 py-1 rounded border ${ownerColor} text-white">${item.owner}</span>
+                                <span class="font-semibold text-secondary-900">${item.step}</span>
+                            </div>
+                            <div class="text-sm text-secondary-700 mb-2">
+                                <strong class="text-secondary-900">Model:</strong> ${item.modelId}
+                            </div>
+                            ${item.notes ? `<div class="text-sm text-secondary-600 mb-2">${item.notes}</div>` : ''}
+                            ${item.tools.length > 0 ? `
+                                <div class="mt-2">
+                                    <div class="text-xs font-medium text-secondary-700 mb-1">Required Capabilities:</div>
+                                    <div class="flex flex-wrap gap-1">
+                                        ${item.tools.map(tool => `<span class="text-xs px-2 py-1 bg-primary-50 border border-primary-200 rounded text-primary-800">${tool}</span>`).join('')}
+                                    </div>
+                                </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+                aiToolsContainer.appendChild(card);
+            });
+            
+            // Render summary if multiple tools
+            if (toolsMap.size > 0) {
+                const summary = document.createElement('div');
+                summary.className = 'bg-gradient-to-r from-primary-50 to-accent-green/10 border border-primary-200 rounded-lg p-4 mt-3';
+                summary.innerHTML = `
+                    <h4 class="font-semibold text-secondary-900 mb-2">📋 Capability Summary</h4>
+                    <div class="space-y-2 text-sm">
+                        ${Array.from(toolsMap.entries()).map(([tool, steps]) => `
+                            <div class="flex items-start">
+                                <span class="font-medium text-secondary-900 mr-2">•</span>
+                                <div>
+                                    <span class="font-medium text-secondary-900">${tool}</span>
+                                    <span class="text-secondary-600"> — used in ${steps.length} step${steps.length > 1 ? 's' : ''}</span>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                aiToolsContainer.appendChild(summary);
+            }
+        }
 
         function renderWorkChart(workChartData, isDraft) {
             // kept for compatibility; shows a linear chart if needed
